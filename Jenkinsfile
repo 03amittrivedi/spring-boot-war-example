@@ -6,12 +6,19 @@ pipeline{
         
 
     stages{
-        stage("Show Maven Version"){
+        stage("MVN Unit Test"){
             steps{
-                sh "mvn --version"
-                echo "This stage will show only MVN Version"
+                sh "mvn test"
+                echo "This stage will perform Unit test"
             }
         }
+        stage("Cretae WAR"){
+            steps{
+                sh "mvn package"
+                echo "This stage will cerate WAr package"
+            }
+        }
+        
         stage("Deploy On test Server Tomcat9"){
             steps{
                 // Deploy the WAR to Tomcat9 server 172.31.46.104
